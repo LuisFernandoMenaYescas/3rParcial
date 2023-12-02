@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-public class CreateAndJoinGroups : MonoBehaviour
+
+public class CreateAndJoinGroups : MonoBehaviourPunCallbacks
 
 {
     public InputField createInput;
     public InputField joinInput;
 
+    
     public void CreateRoom()
     {
         PhotonNetwork.CreateRoom(createInput.text);
@@ -19,6 +21,10 @@ public class CreateAndJoinGroups : MonoBehaviour
         PhotonNetwork.JoinRoom(joinInput.text);
     }
     // Start is called before the first frame update
+    public override void OnJoinedRoom()
+    {
+        PhotonNetwork.LoadLevel("Game");
+    }
     void Start()
     {
         
